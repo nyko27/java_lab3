@@ -18,4 +18,11 @@ public class Kefir extends AbstractDairyDrink {
         this.cereals = cereals;
     }
 
+    public String getHeaders() {
+        return super.getHeaders() + "," + "cereals";
+    }
+
+    public String toCSV() {
+        return super.toCSV() + "," + cereals;
+    }
 }

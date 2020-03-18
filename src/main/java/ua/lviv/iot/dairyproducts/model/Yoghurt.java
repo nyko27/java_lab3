@@ -18,4 +18,11 @@ public class Yoghurt extends AbstractDairyDrink {
         this.vitamins = vitamins;
     }
 
+    public String getHeaders() {
+        return super.getHeaders() + "," + "vitamins";
+    }
+
+    public String toCSV() {
+        return super.toCSV() + "," + vitamins;
+    }
 }
