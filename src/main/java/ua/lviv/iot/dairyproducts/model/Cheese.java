@@ -28,4 +28,12 @@ public class Cheese extends AbstractDairyProduct {
         this.nameOfCheese = nameOfCheese;
     }
 
+    public String getHeaders() {
+        return super.getHeaders() + "," + "weightInGrams,nameOfCheese";
+    }
+
+    public String toCSV() {
+        return super.toCSV() + "," + weightInGrams + "," + nameOfCheese;
+    }
+
 }

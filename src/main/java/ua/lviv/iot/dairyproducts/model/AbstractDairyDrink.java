@@ -18,4 +18,12 @@ public abstract class AbstractDairyDrink extends AbstractDairyProduct {
         this.volumeInLitres = volumeInLitres;
     }
 
+    public String getHeaders() {
+        return super.getHeaders() + "," + "volumeInLitres";
+    }
+
+    public String toSCV() {
+        return super.toCSV() + "," + volumeInLitres;
+    }
+
 }

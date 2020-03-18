@@ -58,4 +58,13 @@ public abstract class AbstractDairyProduct {
         this.warrantyPeriodInDays = warrantyPeriodInDays;
     }
 
+    public String getHeaders() {
+        return "warrantyPeriodInDays,priceInUAH,producer,producingCountry,fatContentInPercentage";
+    }
+
+    public String toCSV() {
+        return warrantyPeriodInDays + "," + priceInUAH + "," + producer + "," + producingCountry + ","
+                + fatContentInPercentage;
+    }
+
 }

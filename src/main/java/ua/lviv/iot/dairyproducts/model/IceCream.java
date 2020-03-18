@@ -39,4 +39,11 @@ public class IceCream extends AbstractDairyProduct {
 
     }
 
+    public String getHeaders() {
+        return super.getHeaders() + "," + "nameOfTaste,weightInGrams,typeOfIceCream";
+    }
+
+    public String toCSV() {
+        return super.toCSV() + "," + nameOfTaste + "," + weightInGrams + "," + typeOfIceCream;
+    }
 }

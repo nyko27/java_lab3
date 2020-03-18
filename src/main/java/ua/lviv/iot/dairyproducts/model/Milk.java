@@ -18,4 +18,11 @@ public class Milk extends AbstractDairyDrink {
         this.acidityInPH = acidityInPH;
     }
 
+    public String getHeaders() {
+        return super.getHeaders() + "," + "acidityInPH";
+    }
+
+    public String toCSV() {
+        return super.toCSV() + "," + acidityInPH;
+    }
 }

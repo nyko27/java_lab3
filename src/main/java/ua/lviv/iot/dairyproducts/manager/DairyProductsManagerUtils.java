@@ -8,8 +8,6 @@ import ua.lviv.iot.dairyproducts.model.SortingType;
 
 public class DairyProductsManagerUtils {
 
-    // anonymous inner class
-
     private static Comparator<AbstractDairyProduct> producerNameComparator = new Comparator<AbstractDairyProduct>() {
 
         @Override
@@ -25,8 +23,6 @@ public class DairyProductsManagerUtils {
             dairyProducts.sort(producerNameComparator.reversed());
         }
     }
-
-    // static class sorting
 
     static class FatContentSorter implements Comparator<AbstractDairyProduct>, Serializable {
 
@@ -48,7 +44,6 @@ public class DairyProductsManagerUtils {
         }
 
     }
-    // lambda function sorting
 
     static Comparator<AbstractDairyProduct> warrantyPeriodSorter = (AbstractDairyProduct firstProduct,
             AbstractDairyProduct secondProduct) -> firstProduct.getWarrantyPeriodInDays()
@@ -62,7 +57,6 @@ public class DairyProductsManagerUtils {
         }
     }
 
-    // inner class sorting
     private class PriceInUAHSorter implements Comparator<AbstractDairyProduct> {
 
         @Override
