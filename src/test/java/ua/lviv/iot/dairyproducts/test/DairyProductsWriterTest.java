@@ -16,41 +16,41 @@ import ua.lviv.iot.dairyproducts.writer.DairyProductsWriter;
 
 public class DairyProductsWriterTest extends BaseDairyProductsManagerTest {
 
-    private String path = "D:\\eclipse-workspace\\work\\path.csv";
+  private String path = "D:\\eclipse-workspace\\work\\path.csv";
 
-    @BeforeEach
-    public void setUp() {
-        createCheeses();
+  @BeforeEach
+  public void setUp() {
+    createCheeses();
+  }
+
+  @Test
+  public void writeToFile() throws IOException {
+
+    try (Writer writerToFile = new FileWriter(path)) {
+
+      DairyProductsWriter writer = new DairyProductsWriter();
+      writer.setProductWriter(writerToFile);
+      writer.writeToFile(cheeses);
     }
+  }
 
-    @Test
-    public void writeToFile() throws IOException {
+  @Test
+  public void testWriting() throws IOException {
+    try (Writer csvWriter = new StringWriter()) {
 
-        try (Writer writerToFile = new FileWriter(path)) {
+      DairyProductsWriter writer = new DairyProductsWriter();
+      writer.setProductWriter(csvWriter);
+      writer.writeToFile(cheeses);
 
-            DairyProductsWriter writer = new DairyProductsWriter();
-            writer.setProductWriter(writerToFile);
-            writer.writeToFile(cheeses);
-        }
+      String writtenString = "";
+
+      for (AbstractDairyProduct product : cheeses) {
+        writtenString += product.getHeaders() + "," + product.toCSV() + "\r\n";
+      }
+
+      assertEquals(writtenString, writer.toString());
+
     }
-
-    @Test
-    public void testWriting() throws IOException {
-        try (Writer csvWriter = new StringWriter()) {
-
-            DairyProductsWriter writer = new DairyProductsWriter();
-            writer.setProductWriter(csvWriter);
-            writer.writeToFile(cheeses);
-
-            String writtenString = "";
-
-            for (AbstractDairyProduct product : cheeses) {
-                writtenString += product.getHeaders() + "," + product.toCSV() + "\r\n";
-            }
-
-            assertEquals(writtenString, writer.toString());
-
-        }
-    }
+  }
 
 }
