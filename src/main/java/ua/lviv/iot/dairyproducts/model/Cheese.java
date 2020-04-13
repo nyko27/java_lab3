@@ -2,38 +2,50 @@ package ua.lviv.iot.dairyproducts.model;
 
 public class Cheese extends AbstractDairyProduct {
 
-    private double weightInGrams;
-    private String nameOfCheese;
+  private double weightInGrams;
+  private String nameOfCheese;
 
-    public double getWeightInGrams() {
-        return weightInGrams;
-    }
+  public Integer getId() {
+    return id;
+  }
 
-    public void setWeightInGrams(double weightInGrams) {
-        this.weightInGrams = weightInGrams;
-    }
+  public void setId(Integer id) {
+    this.id = id;
+  }
 
-    public String getNameOfCheese() {
-        return nameOfCheese;
-    }
+  public double getWeightInGrams() {
+    return weightInGrams;
+  }
 
-    public void setNameOfCheese(String nameOfCheese) {
-        this.nameOfCheese = nameOfCheese;
-    }
+  public void setWeightInGrams(double weightInGrams) {
+    this.weightInGrams = weightInGrams;
+  }
 
-    public Cheese(int warrantyPeriodInDays, double priceInUAH, String producer, String producingCountry,
-            double fatContentInPercentage, double weightInGrams, String nameOfCheese) {
-        super(warrantyPeriodInDays, priceInUAH, producer, producingCountry, fatContentInPercentage);
-        this.weightInGrams = weightInGrams;
-        this.nameOfCheese = nameOfCheese;
-    }
+  public String getNameOfCheese() {
+    return nameOfCheese;
+  }
 
-    public String getHeaders() {
-        return super.getHeaders() + "," + "weightInGrams,nameOfCheese";
-    }
+  public void setNameOfCheese(String nameOfCheese) {
+    this.nameOfCheese = nameOfCheese;
+  }
 
-    public String toCSV() {
-        return super.toCSV() + "," + weightInGrams + "," + nameOfCheese;
-    }
+  public Cheese(int warrantyPeriodInDays, double priceInUAH, String producer, String producingCountry,
+      double fatContentInPercentage, double weightInGrams, String nameOfCheese) {
+    super(warrantyPeriodInDays, priceInUAH, producer, producingCountry, fatContentInPercentage);
+    this.weightInGrams = weightInGrams;
+    this.nameOfCheese = nameOfCheese;
+  }
+
+  public Cheese() {
+
+  }
+
+  public String getHeaders() {
+    return super.getHeaders() + "," + "weightInGrams,nameOfCheese";
+  }
+
+  public String toCSV() {
+    return super.toCSV() + "," + weightInGrams + "," + nameOfCheese;
+  }
 
 }
