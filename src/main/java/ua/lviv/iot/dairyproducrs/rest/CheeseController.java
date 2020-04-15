@@ -42,16 +42,20 @@ public class CheeseController {
   }
 
   @DeleteMapping(path = "/{id}")
-  public ResponseEntity<Cheese> deleteStudent(@PathVariable("id") Integer cheeseId) {
+  public ResponseEntity<Cheese> deleteCheese(@PathVariable("id") Integer cheeseId) {
     HttpStatus status = cheeses.remove(cheeseId) == null ? HttpStatus.NOT_FOUND : HttpStatus.OK;
     return ResponseEntity.status(status).build();
   }
 
   @PutMapping(path = "/{id}")
-  public ResponseEntity<Cheese> updateStudent(final @PathVariable("id") Integer cheeseId,
+  public ResponseEntity<Cheese> updateCheese(final @PathVariable("id") Integer cheeseId,
       final @RequestBody Cheese cheese) {
     cheese.setId(cheeseId);
-    HttpStatus status = cheeses.put(cheeseId, cheese) == null ? HttpStatus.NOT_FOUND : HttpStatus.OK;
-    return ResponseEntity.status(status).build();
+
+    Cheese oldCheese = cheeses.replace(cheeseId, cheese);
+    ResponseEntity<Cheese> state = oldCheese == null ? new ResponseEntity<Cheese>(HttpStatus.NOT_FOUND)
+        : new ResponseEntity<Cheese>(oldCheese, HttpStatus.OK);
+    return state;
   }
+
 }
