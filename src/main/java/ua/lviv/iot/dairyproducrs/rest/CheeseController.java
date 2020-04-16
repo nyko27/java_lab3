@@ -49,13 +49,13 @@ public class CheeseController {
 
   @PutMapping(path = "/{id}")
   public ResponseEntity<Cheese> updateCheese(final @PathVariable("id") Integer cheeseId,
-      final @RequestBody Cheese cheese) {
-    cheese.setId(cheeseId);
-
-    Cheese oldCheese = cheeses.replace(cheeseId, cheese);
-    ResponseEntity<Cheese> state = oldCheese == null ? new ResponseEntity<Cheese>(HttpStatus.NOT_FOUND)
-        : new ResponseEntity<Cheese>(oldCheese, HttpStatus.OK);
-    return state;
+      final @RequestBody Cheese newCheese) {
+    Cheese oldcheese = cheeses.get(cheeseId);
+    if (oldcheese != null) {
+      cheeses.put(cheeseId, newCheese);
+      return new ResponseEntity<Cheese>(oldcheese, HttpStatus.OK);
+    }
+    return new ResponseEntity<Cheese>(HttpStatus.NOT_FOUND);
   }
 
 }
