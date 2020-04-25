@@ -1,5 +1,8 @@
 package ua.lviv.iot.dairyproducts.model;
 
+import javax.persistence.Entity;
+
+@Entity
 public class Cheese extends AbstractDairyProduct {
 
   private double weightInGrams;
