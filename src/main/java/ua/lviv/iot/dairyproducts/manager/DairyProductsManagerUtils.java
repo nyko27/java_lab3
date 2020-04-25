@@ -8,69 +8,69 @@ import ua.lviv.iot.dairyproducts.model.SortingType;
 
 public class DairyProductsManagerUtils {
 
-    private static Comparator<AbstractDairyProduct> producerNameComparator = new Comparator<AbstractDairyProduct>() {
+  private static Comparator<AbstractDairyProduct> producerNameComparator = new Comparator<AbstractDairyProduct>() {
 
-        @Override
-        public int compare(AbstractDairyProduct firstProduct, AbstractDairyProduct secondProduct) {
-            return firstProduct.getProducer().compareTo(secondProduct.getProducer());
-        }
-    };
+    @Override
+    public int compare(AbstractDairyProduct firstProduct, AbstractDairyProduct secondProduct) {
+      return firstProduct.getProducer().compareTo(secondProduct.getProducer());
+    }
+  };
 
-    public static void sortByProducerName(List<AbstractDairyProduct> dairyProducts, SortingType sortingType) {
-        if (sortingType == SortingType.ASCENDING) {
-            dairyProducts.sort(producerNameComparator);
-        } else if (sortingType == SortingType.DESCENDING) {
-            dairyProducts.sort(producerNameComparator.reversed());
-        }
+  public static void sortByProducerName(List<AbstractDairyProduct> dairyProducts, SortingType sortingType) {
+    if (sortingType == SortingType.ASCENDING) {
+      dairyProducts.sort(producerNameComparator);
+    } else if (sortingType == SortingType.DESCENDING) {
+      dairyProducts.sort(producerNameComparator.reversed());
+    }
+  }
+
+  static class FatContentSorter implements Comparator<AbstractDairyProduct>, Serializable {
+
+    private static final long serialVersionUID = 1L;
+
+    @Override
+    public int compare(AbstractDairyProduct firstProduct, AbstractDairyProduct secondProduct) {
+      return (int) (firstProduct.getFatContentInPercentage() - secondProduct.getFatContentInPercentage());
     }
 
-    static class FatContentSorter implements Comparator<AbstractDairyProduct>, Serializable {
+  }
 
-        private static final long serialVersionUID = 1L;
+  public static void sortByFatContent(List<AbstractDairyProduct> dairyProducts, SortingType sortingType) {
 
-        @Override
-        public int compare(AbstractDairyProduct firstProduct, AbstractDairyProduct secondProduct) {
-            return (int) (firstProduct.getFatContentInPercentage() - secondProduct.getFatContentInPercentage());
-        }
-
+    if (sortingType == SortingType.ASCENDING) {
+      dairyProducts.sort(new FatContentSorter());
+    } else if (sortingType == SortingType.DESCENDING) {
+      dairyProducts.sort(new FatContentSorter().reversed());
     }
 
-    public static void sortByFatContent(List<AbstractDairyProduct> dairyProducts, SortingType sortingType) {
+  }
 
-        if (sortingType == SortingType.ASCENDING) {
-            dairyProducts.sort(new FatContentSorter());
-        } else if (sortingType == SortingType.DESCENDING) {
-            dairyProducts.sort(new FatContentSorter().reversed());
-        }
+  static Comparator<AbstractDairyProduct> warrantyPeriodSorter = (AbstractDairyProduct firstProduct,
+      AbstractDairyProduct secondProduct) -> firstProduct.getWarrantyPeriodInDays()
+          - secondProduct.getWarrantyPeriodInDays();
 
+  public static void sortByWarrantyPeriod(List<AbstractDairyProduct> dairyProducts, SortingType sortingType) {
+    if (sortingType == SortingType.ASCENDING) {
+      dairyProducts.sort(warrantyPeriodSorter);
+    } else if (sortingType == SortingType.DESCENDING) {
+      dairyProducts.sort(warrantyPeriodSorter.reversed());
     }
+  }
 
-    static Comparator<AbstractDairyProduct> warrantyPeriodSorter = (AbstractDairyProduct firstProduct,
-            AbstractDairyProduct secondProduct) -> firstProduct.getWarrantyPeriodInDays()
-                    - secondProduct.getWarrantyPeriodInDays();
+  private class PriceInUAHSorter implements Comparator<AbstractDairyProduct> {
 
-    public static void sortByWarrantyPeriod(List<AbstractDairyProduct> dairyProducts, SortingType sortingType) {
-        if (sortingType == SortingType.ASCENDING) {
-            dairyProducts.sort(warrantyPeriodSorter);
-        } else if (sortingType == SortingType.DESCENDING) {
-            dairyProducts.sort(warrantyPeriodSorter.reversed());
-        }
+    @Override
+    public int compare(AbstractDairyProduct firstProduct, AbstractDairyProduct secondProduct) {
+      return (int) (firstProduct.getPriceInUAH() - secondProduct.getPriceInUAH());
     }
+  }
 
-    private class PriceInUAHSorter implements Comparator<AbstractDairyProduct> {
+  public static void sortByPrice(List<AbstractDairyProduct> dairyProducts, SortingType sortingType) {
 
-        @Override
-        public int compare(AbstractDairyProduct firstProduct, AbstractDairyProduct secondProduct) {
-            return (int) (firstProduct.getPriceInUAH() - secondProduct.getPriceInUAH());
-        }
+    if (sortingType == SortingType.ASCENDING) {
+      dairyProducts.sort(new DairyProductsManagerUtils().new PriceInUAHSorter());
+    } else if (sortingType == SortingType.DESCENDING) {
+      dairyProducts.sort(new DairyProductsManagerUtils().new PriceInUAHSorter().reversed());
     }
-
-    public static void sortByPrice(List<AbstractDairyProduct> dairyProducts, SortingType sortingType) {
-
-        if (sortingType == SortingType.ASCENDING) {
-            dairyProducts.sort(new DairyProductsManagerUtils().new PriceInUAHSorter());
-        } else if (sortingType == SortingType.DESCENDING) {
-            dairyProducts.sort(new DairyProductsManagerUtils().new PriceInUAHSorter().reversed());
-        }
-    }
+  }
 }

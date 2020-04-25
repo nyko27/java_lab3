@@ -10,19 +10,19 @@ import ua.lviv.iot.dairyproducts.model.AbstractDairyProduct;
 
 class DairyProductsManagerTest extends BaseDairyProductsManagerTest {
 
-    private DairyProductsManager dairyProductsManager;
+  private DairyProductsManager dairyProductsManager;
 
-    @BeforeEach
-    public void setUp() {
-        dairyProductsManager = new DairyProductsManager();
-        createIceCreams();
-        dairyProductsManager.addDairyProducts(iceCreams);
-    }
+  @BeforeEach
+  public void setUp() {
+    dairyProductsManager = new DairyProductsManager();
+    createIceCreams();
+    dairyProductsManager.addDairyProducts(iceCreams);
+  }
 
-    @Test
-    public void testFindPorductsWithPriceHigherThan() {
-        List<AbstractDairyProduct> dairyProducts = dairyProductsManager.findPorductsWithPriceHigherThan(20);
-        assertEquals(1, dairyProducts.size());
-        assertEquals(24, dairyProducts.get(0).getPriceInUAH());
-    }
+  @Test
+  public void testFindPorductsWithPriceHigherThan() {
+    List<AbstractDairyProduct> dairyProducts = dairyProductsManager.findPorductsWithPriceHigherThan(20);
+    assertEquals(1, dairyProducts.size());
+    assertEquals(24, dairyProducts.get(0).getPriceInUAH());
+  }
 }
