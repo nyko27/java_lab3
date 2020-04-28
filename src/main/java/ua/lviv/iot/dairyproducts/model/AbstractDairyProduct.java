@@ -3,7 +3,9 @@ package ua.lviv.iot.dairyproducts.model;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
 
+@MappedSuperclass
 public abstract class AbstractDairyProduct {
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
@@ -23,9 +25,9 @@ public abstract class AbstractDairyProduct {
     this.producingCountry = producingCountry;
     this.fatContentInPercentage = fatContentInPercentage;
   }
-  
+
   public AbstractDairyProduct() {
-    
+
   }
 
   public Integer getId() {
